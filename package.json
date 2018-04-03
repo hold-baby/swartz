@@ -1,0 +1,31 @@
+{
+  "name": "swartz",
+  "version": "0.0.1",
+  "description": "node web server",
+  "main": "index.js",
+  "preferGlobal": "true",
+  "bin": {
+    "swartz": "bin/swartz.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hold-baby/swartz.git"
+  },
+  "keywords": [
+    "node",
+    "server"
+  ],
+  "author": "hold-baby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hold-baby/swartz/issues"
+  },
+  "homepage": "https://github.com/hold-baby/swartz#readme",
+  "dependencies": {
+    "colors": "^1.2.1",
+    "commander": "^2.15.1"
+  }
+}
