@@ -7,11 +7,11 @@ const archiver = require('archiver');
  * 客户端推送服务
  */
 function pushServer(obj){
-	const WEB_SERVER_ADDR = path.join(process.cwd(), obj.dir); // 待压缩目录
-	const ARCHIVER_PATH = path.join(process.cwd(), obj.dir + '.zip'); // 压缩文件
+	const WEB_SERVER_ADDR = path.join(process.cwd(), obj.path); // 待压缩目录
+	const ARCHIVER_PATH = path.join(process.cwd(), obj.path + '.zip'); // 压缩文件
 	const PUSH_URL = obj.url // 上传url
 
-	let output = fs.createWriteStream(obj.dir + '.zip');
+	let output = fs.createWriteStream(obj.path + '.zip');
 	let archive = archiver('zip');
 
 	function getUpload(){
