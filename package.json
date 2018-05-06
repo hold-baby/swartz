@@ -1,6 +1,6 @@
 {
   "name": "swartz",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "node web server",
   "main": "index.js",
   "preferGlobal": "true",
@@ -25,7 +25,12 @@
   },
   "homepage": "https://github.com/hold-baby/swartz#readme",
   "dependencies": {
+    "archiver": "^2.1.1",
     "colors": "^1.2.1",
-    "commander": "^2.15.1"
+    "commander": "^2.15.1",
+    "express": "^4.16.3",
+    "formidable": "^1.2.1",
+    "node-unzip-2": "^0.2.7",
+    "request": "^2.85.0"
   }
 }
