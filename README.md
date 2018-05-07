@@ -1,2 +1,2 @@
 # swartz
-node web server
+swartz server
