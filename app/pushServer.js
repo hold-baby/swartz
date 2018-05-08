@@ -15,23 +15,27 @@ function pushServer(obj){
 	let archive = archiver('zip');
 
 	function getUpload(){
-		let url = PUSH_URL;
+		let key = obj.keys ? ('?keys=' + obj.keys) : '';
+		let url = PUSH_URL + key;
 		let data = fs.createReadStream(ARCHIVER_PATH)
 		let form = {
 			type:'zip',
-			file:data,
-			path:'/temp'
+			keys : obj.keys,
+			file:data
 		}
-
 		request.post({
 			url:url,
-			formData:form
+			formData:form,
 		},(err,res,body)=>{
 			if(err){
 				console.log(err)
 				return
 			}
-			console.log('发布成功')
+			if(res.statusCode === 200){
+				console.log('发布成功')
+			}else{
+				console.log(res.statusCode, res.body)
+			}
 		})
 	}
 

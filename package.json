@@ -5,7 +5,8 @@
   "main": "index.js",
   "preferGlobal": "true",
   "bin": {
-    "swartz": "bin/swartz.js"
+    "swartz": "bin/swartz.js",
+    "sw": "bin/swartz.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
