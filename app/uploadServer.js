@@ -36,8 +36,11 @@ function uploadServer(obj){
         extended : true
     }));
 
-    app.post("/push", function(req, res){
+    let uploadList = [];
+    let percent = 0;
 
+    app.post("/push", function(req, res){
+        
         if(uploadLock){
             res.status(400).end('上传进程被占用')
         }
@@ -105,6 +108,19 @@ function uploadServer(obj){
                 } 
             })
         })
+
+        form.on("progress", function (bytesReceived, bytesExpected) {
+            percent = parseInt(bytesReceived / bytesExpected * 100);
+        });
+    })
+
+    app.get('/get_progress', function(req, res){
+        res.status(200).send({
+            percent : percent
+        })
+        if(percent == 100){
+            percent = 0;
+        }
     })
 
     app.listen(obj.port, function() {  
