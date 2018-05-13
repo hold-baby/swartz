@@ -1,5 +1,6 @@
 let path = require('path');
 let express = require('express');
+let history = require('connect-history-api-fallback');
 
 const _ = require('../lib/util.js');
 
@@ -11,6 +12,10 @@ module.exports = function webServer(obj){
 
 	// 使用命令行目录作为web服务地址
 	const serverAddr = path.resolve(process.cwd(), obj.path); // 获取当前命令行目录
+
+	if(obj.history && typeof obj.history === 'boolean'){
+		webApp.use(history())
+	};
 
 	webApp.use('/', express.static(serverAddr));
 	webApp.listen(obj.port, function(){
