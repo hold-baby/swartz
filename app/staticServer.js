@@ -19,7 +19,7 @@ module.exports = function webServer(obj){
 		// 有path则router不生效
 		if(!!obj.router && Object.keys(obj.router).length !== 0){
 			for(var i in obj.router){
-				static.use(i, express.static(__dirname + obj.router[i]));
+				static.use(i, express.static(process.cwd() + obj.router[i]));
 			}
 		}
 	}
