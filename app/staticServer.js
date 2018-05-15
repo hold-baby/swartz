@@ -13,7 +13,7 @@ module.exports = function webServer(obj){
 		// 使用命令行目录作为web服务地址
 		const serverAddr = path.resolve(process.cwd(), obj.path); // 获取当前命令行目录
 
-		static.use('/', _.cors);
+		// static.use('/', _.cors);
 		static.use('/', express.static(serverAddr));
 	}else{
 		// path和router不能同时存在
