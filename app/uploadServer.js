@@ -31,7 +31,7 @@ function uploadServer(obj){
     // const maxFieldsSize = 1 * 1024 * 1024;
     const maxFieldsSize = '';
 
-    app.all('/', cors); 
+    app.all('/', _.cors); 
     app.use('/',bodyParser.urlencoded({
         extended : true
     }));
@@ -160,19 +160,3 @@ function deleteall(path) {
         fs.rmdirSync(path);  
     }
 };
-
-// 跨域中间件
-function cors(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");  
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-File-Name");  
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");  
-    res.header("Content-Type", "application/json;charset=utf-8"); 
-    res.header("X-Powered-By",' 3.2.1');
-    res.header("Cache-Control","no-store"); 
-    if (req.method == 'OPTIONS') {
-        res.sendStatus(200).end();  //让options请求快速返回/
-    }
-    else {
-        next();
-    }
-}

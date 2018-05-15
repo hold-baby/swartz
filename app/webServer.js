@@ -17,7 +17,6 @@ module.exports = function webServer(obj){
 		webApp.use(history())
 	};
 
-	// webApp.use('/', _.cors);
 	webApp.use('/', express.static(serverAddr));
 	webApp.listen(obj.port, function(){
 		console.log("web server is open at " + _.getIP() + ':' + obj.port)

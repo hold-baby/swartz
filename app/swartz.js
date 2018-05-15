@@ -6,15 +6,7 @@ const staticServer = require('../app/staticServer.js');
 const uploadServer = require('../app/uploadServer');
 const pushServer = require('../app/pushServer');
 
-function checkObj(obj){
-	if(!obj.port){
-		console.log('服务缺少端口')
-		return false
-	}
-
-	return true
-}
-
+// swartz类
 function swartz(){
 	this.serverQueue = [];
 	
@@ -58,8 +50,17 @@ function swartz(){
 			fn : fn
 		});
 	}
+};
 
-}
+// 检查是否有端口参数
+function checkObj(obj){
+	if(!obj.port){
+		console.log('服务缺少端口')
+		return false
+	}
+
+	return true
+};
 
 
 module.exports = new swartz()
