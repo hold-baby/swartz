@@ -1,5 +1,5 @@
 # swartz
-
+![logo](./public/img/swartz.png)
 ### 安装
 ```
 npm  i  swartz -g
