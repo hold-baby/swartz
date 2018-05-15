@@ -8,6 +8,7 @@ const ProgressBar = require('progress');
  * 客户端推送服务
  */
 function pushServer(obj){
+	
 	let WEB_SERVER_ADDR = path.join(obj.path); // 待压缩目录
 	let ARCHIVER_PATH = path.join(obj.path + '.zip'); // 压缩文件
 	if (!fs.existsSync(WEB_SERVER_ADDR)) {  

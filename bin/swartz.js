@@ -13,23 +13,12 @@ const swartz = require('../app/swartz.js');
 program
 .usage("swartz")
 .version(pkg.version, '-v, --version')
-.option('server', '服务端命令')
-.option('s, tart', 'web服务启动')
-.option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
+// .option('server', '服务端命令')
 .parse(process.argv);
 
 // 命令行参数
 var args = program.args;
 
-if (program.server) {
-	switch(args[0]){
-		case 'init':
-			console.log('init')
-			break;
-		default:
-			console.log('请使用正确的命令'.red);
-	}
-}
 // 读取配置文件
 const cfgFile = process.cwd() + '/sw-config.js';
 fs.exists(cfgFile, function(exists){
