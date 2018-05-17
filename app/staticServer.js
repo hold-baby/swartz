@@ -20,13 +20,13 @@ module.exports = function staticServer(obj){
 		// path和router不能同时存在
 		// 有path则router不生效
 		if(!!obj.router && Object.keys(obj.router).length !== 0){
-			for(var i in obj.router){
+			for(let i in obj.router){
 				static.use(i, express.static(process.cwd() + obj.router[i]));
 			}
 		}
 	}
 
-	static.listen(obj.port, function(){
+	static.listen(obj.port, () => {
 		console.log("web server is open at " + _.getIP() + ':' + obj.port)
 	})
 	

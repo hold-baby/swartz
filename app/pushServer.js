@@ -17,7 +17,7 @@ function pushServer(obj){
     };
 
     // 进度条配置
-    var bar = new ProgressBar(':bar:percent ', { 
+    let bar = new ProgressBar(':bar:percent ', { 
     	total : 20,
     	incomplete  : '_',
     	complete  : '█'
@@ -45,7 +45,7 @@ function pushServer(obj){
 		request.post({
 			url:url,
 			formData:form,
-		},(err,res,body)=>{
+		},(err,res,body) => {
 			if(err){
 				console.log(err)
 				return
@@ -61,7 +61,7 @@ function pushServer(obj){
 
 	// 获取上传进度
 	function getProgress(){
-		var timer;
+		let timer;
 		timer = setInterval(function(){
 			request.get({
 				url : obj.url.replace('push', 'get_progress')
@@ -70,7 +70,7 @@ function pushServer(obj){
 					console.log('err',err)
 					return
 				}
-				var percent = parseInt(JSON.parse(body).percent / 5);
+				let percent = parseInt(JSON.parse(body).percent / 5);
 				if(bar.percent >= bar.total){
 					return
 				}

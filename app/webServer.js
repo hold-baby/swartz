@@ -18,7 +18,7 @@ module.exports = function webServer(obj){
 	};
 
 	webApp.use('/', express.static(serverAddr));
-	webApp.listen(obj.port, function(){
+	webApp.listen(obj.port, () => {
 		console.log("web server is open at " + _.getIP() + ':' + obj.port)
 	})
 	

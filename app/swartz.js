@@ -5,51 +5,48 @@ const webServer = require('../app/webServer.js');
 const staticServer = require('../app/staticServer.js');
 const uploadServer = require('../app/uploadServer');
 const pushServer = require('../app/pushServer');
+const swartzInit = require('../app/swartzInit');
 
 // swartz类
 function swartz(){
 	this.serverQueue = [];
-	
-	this.webServer = function(obj){
+	// 前端页面服务
+	this.webServer = (obj) => {
 		if(!checkObj(obj)){
 			return
 		}
 		_.probe(obj.port).then(() => {
 			this.serverQueue.push(webServer(obj));
-		}, function(err){
-			console.log(obj.port + '端口被占用')			
 		})
 	};
-	this.staticServer = function(obj){
+	// 静态资源服务
+	this.staticServer = (obj) => {
 		if(!checkObj(obj)){
 			return
 		}
 		_.probe(obj.port).then(() => {
 			this.serverQueue.push(staticServer(obj));
-		}, function(err){
-			console.log(obj.port + '端口被占用')			
 		})
 	};
-
-	this.uploadServer = function(obj){
+	// 接收服务
+	this.uploadServer = (obj) => {
 		_.probe(obj.port).then(() => {
 			uploadServer(obj)
-		}, function(err){
-			console.log(obj.port + '端口被占用')	
 		})
 	};
-
-	this.pushServer = function(obj){
+	// 上传服务
+	this.pushServer = (obj) => {
 		pushServer(obj)
 	};
-
+	// 获取配置任务
 	this.taskList = [];
-	this.task = function(task, fn){
+	this.task = (task, fn) => {
 		this.taskList.push({
 			taskName : task,
 			fn : fn
 		});
-	}
+	};
+	this.swartzInit = swartzInit;
 };
 
 // 检查是否有端口参数

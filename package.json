@@ -16,8 +16,9 @@
     "url": "git+https://github.com/hold-baby/swartz.git"
   },
   "keywords": [
-    "node",
-    "server"
+    "jenkins",
+    "push",
+    "deploy"
   ],
   "author": "hold-baby",
   "license": "MIT",

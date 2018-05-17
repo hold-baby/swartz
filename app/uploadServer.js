@@ -39,7 +39,7 @@ function uploadServer(obj){
     let uploadList = [];
     let percent = 0;
 
-    app.post("/push", function(req, res){
+    app.post("/push", (req, res) => {
         
         if(uploadLock){
             res.status(400).end('上传进程被占用')
@@ -70,7 +70,7 @@ function uploadServer(obj){
         // 使用文件的原扩展名
         form.keepExtensions = true; 
 
-        form.parse(req,function(err,fields,file){
+        form.parse(req, (err,fields,file) => {
 
             let filePath = ""; // 文件的目录层级
             let fileName = ""; // 文件原始名字
@@ -96,7 +96,7 @@ function uploadServer(obj){
             // 获取文件后缀名
             const fileExt = filePath.substring(filePath.lastIndexOf('.'));
 
-            fs.rename(filePath ,targetDir, function(){
+            fs.rename(filePath ,targetDir, (err) => {
                 if (err) {  
                     console.info(err);
                     uploadLock = false;
@@ -109,12 +109,12 @@ function uploadServer(obj){
             })
         })
 
-        form.on("progress", function (bytesReceived, bytesExpected) {
+        form.on("progress", (bytesReceived, bytesExpected) => {
             percent = parseInt(bytesReceived / bytesExpected * 100);
         });
     })
 
-    app.get('/get_progress', function(req, res){
+    app.get('/get_progress', (req, res) => {
         res.status(200).send({
             percent : percent
         })
@@ -123,7 +123,7 @@ function uploadServer(obj){
         }
     })
 
-    app.listen(obj.port, function() {  
+    app.listen(obj.port, () => {
         console.log('upload Server is running on: ', _.getIP() + ':' +obj.port);  
     }); 
 
@@ -149,7 +149,7 @@ function deleteall(path) {
     var files = []; 
     if(fs.existsSync(path)) {  
         files = fs.readdirSync(path);  
-        files.forEach(function(file, index) {  
+        files.forEach((file, index) => {  
             var curPath = path + "/" + file;  
             if(fs.statSync(curPath).isDirectory()) { // recurse  
                 deleteall(curPath);  
