@@ -21,7 +21,7 @@ program
 const args = program.args;
 
 if(program.init){
-	swartz.swartzInit()
+	swartz.swartzInit();
 }else{
 	// 读取配置文件
 	const cfgFile = process.cwd() + '/sw-config.js';

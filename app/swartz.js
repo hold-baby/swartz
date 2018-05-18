@@ -1,22 +1,25 @@
 const path = require('path');
 
-const _ = require('../lib/util.js');
-const webServer = require('../app/webServer.js');
-const staticServer = require('../app/staticServer.js');
+const _ = require('../lib/util');
+const webServer = require('../app/webServer');
+const staticServer = require('../app/staticServer');
 const uploadServer = require('../app/uploadServer');
 const pushServer = require('../app/pushServer');
 const swartzInit = require('../app/swartzInit');
+const Listen = require('../app/listen');
 
 // swartz类
 function swartz(){
 	this.serverQueue = [];
+	this.serverList = {};
 	// 前端页面服务
 	this.webServer = (obj) => {
 		if(!checkObj(obj)){
 			return
 		}
 		_.probe(obj.port).then(() => {
-			this.serverQueue.push(webServer(obj));
+			// this.serverQueue.push(webServer(obj));
+			this.createChild('/webServer.js', obj)
 		})
 	};
 	// 静态资源服务
@@ -25,13 +28,15 @@ function swartz(){
 			return
 		}
 		_.probe(obj.port).then(() => {
-			this.serverQueue.push(staticServer(obj));
+			// this.serverQueue.push(staticServer(obj));
+			this.createChild('/staticServer.js', obj)
 		})
 	};
 	// 接收服务
 	this.uploadServer = (obj) => {
 		_.probe(obj.port).then(() => {
-			uploadServer(obj)
+			// uploadServer(obj)
+			this.createChild('/uploadServer.js', obj)
 		})
 	};
 	// 上传服务
@@ -46,7 +51,15 @@ function swartz(){
 			fn : fn
 		});
 	};
+	// 初始化配置文件
 	this.swartzInit = swartzInit;
+	// 创建子进程
+	this.createChild = function(path, obj){
+		var app = new Listen(__dirname + path, obj)
+		if(app.getID){
+			this.serverList[app.getID] = app;
+		}
+	};
 };
 
 // 检查是否有端口参数

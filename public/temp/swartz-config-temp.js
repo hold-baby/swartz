@@ -26,7 +26,7 @@ swartz.task('app', function(){
 	})
 	// 上传接收发布服务
 	swartz.uploadServer({
-		port : '9003',
+		port : 9003,
 		target : 'view'
 	})
 })

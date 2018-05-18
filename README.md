@@ -34,12 +34,13 @@ swartz.task('push', function(){
 	swartz.pushServer({
 		url : 'http://127.0.0.1:xxxx/push', // 上传接收地址
 		path : 'path', // 待上传目录（会打包成压缩包上传）
-		keys : 'keys' // 上传验证凭证
+		keys : 'keys' // 上传验证凭证(可选)
 	})
 });
 ```
 ### 使用
 ```
+swartz init // 创建配置文件
 swartz app // 执行配置文件中的app任务
 swartz push // 执行配置文件中的push任务
 swartz app => sw app // swartz可简写成sw
