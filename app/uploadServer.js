@@ -102,7 +102,7 @@ function uploadServer(obj){
                 const fileExt = filePath.substring(filePath.lastIndexOf('.'));
 
                 // 修改文件名为原文件名
-                const targetName = targetDir + fileExt;
+                const targetName = path.join(tmpdir, fileName);
 
                 fs.rename(filePath ,targetName, (err) => {
                     if (err) {  
