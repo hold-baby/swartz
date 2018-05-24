@@ -51,7 +51,7 @@ function pushServer(obj){
 				return
 			}
 			if(res.statusCode === 200){
-				console.log('发布成功')
+				
 			}else{
 				console.log(res.statusCode, res.body)
 			}
@@ -61,25 +61,29 @@ function pushServer(obj){
 
 	// 获取上传进度
 	function getProgress(){
-		let timer;
-		timer = setInterval(function(){
-			request.get({
-				url : obj.url.replace('push', 'get_progress')
-			},(err,res,body)=>{
-				if(err){
-					console.log('err',err)
-					return
-				}
-				let percent = parseInt(JSON.parse(body).percent / 5);
-				if(bar.percent >= bar.total){
-					return
-				}
-				bar.tick(percent)
-				if(bar.complete){
-					clearInterval(timer)
-				};
-			})
-		}, 100)
+		function interval(){
+			setTimeout(function(){
+				request.get({
+					url : obj.url.replace('push', 'get_progress')
+				},(err,res,body)=>{
+					if(err){
+						console.log(err)
+						return
+					};
+					let percent = parseInt(JSON.parse(body).percent / 5);
+					if(bar.percent >= bar.total){
+						return
+					}
+					bar.tick(percent)
+					if(!bar.complete){
+						interval()
+					}else{
+						console.log('发布成功')
+					};
+				})
+			}, 100)
+		};
+		interval()
 	};
 
 	output.on('close', function() {
