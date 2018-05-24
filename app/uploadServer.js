@@ -101,7 +101,10 @@ function uploadServer(obj){
                 // 获取文件后缀名
                 const fileExt = filePath.substring(filePath.lastIndexOf('.'));
 
-                fs.rename(filePath ,targetDir, (err) => {
+                // 修改文件名为原文件名
+                const targetName = targetDir + fileExt;
+
+                fs.rename(filePath ,targetName, (err) => {
                     if (err) {  
                         console.info(err);
                         uploadLock = false;
@@ -109,7 +112,8 @@ function uploadServer(obj){
                     } else { 
                         uploadLock = false;
                         res.status(200).send('200').end();
-                        exto(filePath, targetDir)
+
+                        exto(targetName, targetDir)
                     } 
                 })
             })
