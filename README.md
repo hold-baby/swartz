@@ -12,7 +12,8 @@ swartz.task('app'){
 	// web服务
 	swartz.webServer({
 		port : xxxx, // 端口
-		path : 'www' // 服务目录
+		path : 'www', // 服务目录
+		history : false // 是否启用history模式
 	});
 	// 静态资源服务
 	swartz.static({

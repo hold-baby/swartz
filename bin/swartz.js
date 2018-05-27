@@ -2,6 +2,7 @@
 
 let program = require('commander');
 const colors = require('colors');
+const path = require('path');
 const fs = require('fs');
 
 const pkg = require('../package.json');
@@ -28,7 +29,32 @@ if(program.init){
 	fs.exists(cfgFile, function(exists){
 		if(exists){
 			const sw = fs.readFileSync(cfgFile,"utf-8");
+			var reg = /require\((\.*?)[^)]*?\)/g;
+
+			var requireLIst = sw.match(reg);
+			var requireMap = {};
+			requireLIst = requireLIst.map((item) => {
+				var key = item;
+				requireMap[key] = '';
+				item = item.replace('require(', "");
+				item = item.replace(')', "");
+				item = item.replace(/\"|'/g, "");
+				requireMap[key] = item;
+				return item
+			})
+			for(let i in requireMap){
+				fs.exists(path.join(process.cwd(),requireMap[i]), (exists) => {
+					if(exists){
+						console.log(requireMap[i] + '存在');
+					}else{
+						console.log(requireMap[i] + '不存在');
+					}
+				})
+			};
+			return
 			eval(sw);
+
+
 
 			args.forEach(function(item){
 				swartz.taskList.map(function(task){

@@ -37,7 +37,7 @@ swartz.task('app', function(){
  * 打包当前目录下的文件夹，请求并发送至部署服务
  */
 swartz.task('push', function(){
-	swartz.push({
+	swartz.pushServer({
 		url : 'http://127.0.0.1:9003/push', // 上传接口地址
 		path : 'view' // 待上传目录
 	})
