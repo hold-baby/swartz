@@ -7,6 +7,7 @@ const fs = require('fs');
 
 const pkg = require('../package.json');
 const cfg = require('../lib/config.js');
+const swFix = require('../lib/swFix.js');
 const swartz = require('../app/swartz.js');
 
 /**
@@ -24,38 +25,18 @@ const args = program.args;
 if(program.init){
 	swartz.swartzInit();
 }else{
-	// 读取配置文件
+	// 配置文件路径
 	const cfgFile = process.cwd() + '/sw-config.js';
 	fs.exists(cfgFile, function(exists){
 		if(exists){
-			const sw = fs.readFileSync(cfgFile,"utf-8");
-			var reg = /require\((\.*?)[^)]*?\)/g;
-
-			var requireLIst = sw.match(reg);
-			var requireMap = {};
-			requireLIst = requireLIst.map((item) => {
-				var key = item;
-				requireMap[key] = '';
-				item = item.replace('require(', "");
-				item = item.replace(')', "");
-				item = item.replace(/\"|'/g, "");
-				requireMap[key] = item;
-				return item
-			})
-			for(let i in requireMap){
-				fs.exists(path.join(process.cwd(),requireMap[i]), (exists) => {
-					if(exists){
-						console.log(requireMap[i] + '存在');
-					}else{
-						console.log(requireMap[i] + '不存在');
-					}
-				})
-			};
-			return
+			// 读取配置文件
+			let sw = fs.readFileSync(cfgFile,"utf-8");
+			
+			// 过滤配置文件中的非文件注入
+			sw = swFix(sw);
+			// 执行配置文件内容
 			eval(sw);
-
-
-
+			// 执行task
 			args.forEach(function(item){
 				swartz.taskList.map(function(task){
 					if(task.taskName == item){
