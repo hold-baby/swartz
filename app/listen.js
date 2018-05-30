@@ -57,8 +57,8 @@ Listen.prototype.switch = function(msg){
 	}
 };
 Listen.prototype.createID = function(){
-	var num = String(parseInt(Math.random() * 10000));
-	var day = new Date().getTime().toString();
+	const num = String(parseInt(Math.random() * 10000));
+	const day = new Date().getTime().toString();
 	this.id = day + num;
 };
 Listen.prototype.getID = function(){

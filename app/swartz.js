@@ -10,7 +10,6 @@ const Listen = require('../app/listen');
 
 // swartz类
 function swartz(){
-	this.serverQueue = [];
 	this.serverList = {};
 	// 前端页面服务
 	this.webServer = (obj) => {
@@ -18,7 +17,6 @@ function swartz(){
 			return
 		}
 		_.probe(obj.port).then(() => {
-			// this.serverQueue.push(webServer(obj));
 			this.createChild('/webServer.js', obj)
 		})
 	};
@@ -28,7 +26,6 @@ function swartz(){
 			return
 		}
 		_.probe(obj.port).then(() => {
-			// this.serverQueue.push(staticServer(obj));
 			this.createChild('/staticServer.js', obj)
 		})
 	};
