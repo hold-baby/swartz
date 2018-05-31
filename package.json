@@ -1,6 +1,6 @@
 {
   "name": "swartz",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "node web server",
   "main": "app/swartz.js",
   "preferGlobal": "true",

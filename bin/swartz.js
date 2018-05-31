@@ -12,8 +12,6 @@ const cfg = require('../lib/config.js');
 
 const cli = new Liftoff({
 	name : 'swartz',
-	processTitle : 'swartz',
-	moduleName : 'swartz',
 	configName: 'sw-config',
 
 	// 只支持js文件
@@ -26,7 +24,7 @@ cli.launch({
 }, function(env){
 	
 	let swartz;
-	swartz = require(env.modulePath);
+	swartz = require('../app/swartz.js');
 
 	Object.defineProperty(global, 'swartz', {
 	  enumerable: true,
@@ -48,6 +46,7 @@ cli.launch({
 	if(program.init){
 		swartz.swartzInit();
 	}else{
+		console.log(env)
 		// 配置文件路径
 		if(env.configPath){
 		    try{
