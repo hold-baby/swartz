@@ -1,6 +1,7 @@
 const path = require('path');
 
 const _ = require('../lib/util');
+require('../lib/format');
 const webServer = require('../app/webServer');
 const staticServer = require('../app/staticServer');
 const uploadServer = require('../app/uploadServer');
