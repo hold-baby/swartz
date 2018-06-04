@@ -51,7 +51,6 @@ function pushServer(obj){
 				return
 			}
 			if(res.statusCode === 200){
-				console.log('res200: ', new Date())
 			}else{
 				console.log(res.statusCode, res.body)
 			}
@@ -78,7 +77,7 @@ function pushServer(obj){
 					if(!bar.complete){
 						interval()
 					}else{
-						console.log('发布成功')
+						console.log('发布成功:', new Date().format('yyyy-MM-dd hh:mm:ss'))
 					};
 				})
 			}, 100)
@@ -87,7 +86,7 @@ function pushServer(obj){
 	};
 
 	output.on('close', function() {
-	  console.log('压缩结束，总大小: ' + archive.pointer() + ' bytes');
+	  console.log('压缩结束，总大小: ' + archive.pointer() + ' bytes\n');
 	  getUpload()
 	});
 

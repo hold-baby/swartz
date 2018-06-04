@@ -46,7 +46,6 @@ cli.launch({
 	if(program.init){
 		swartz.swartzInit();
 	}else{
-		console.log(env)
 		// 配置文件路径
 		if(env.configPath){
 		    try{
