@@ -16,7 +16,7 @@ function staticServer(obj){
 	try{
 
 		static.use('*', _.corsStatic);
-
+		
 		if(!!obj.path){
 			// 使用命令行目录作为web服务地址
 			const serverAddr = path.resolve(process.cwd(), obj.path); // 获取当前命令行目录

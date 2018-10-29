@@ -1,6 +1,6 @@
 {
   "name": "swartz",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A deployment scheme for Test Server",
   "main": "app/swartz.js",
   "preferGlobal": "true",
