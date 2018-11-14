@@ -13,6 +13,12 @@ swartz.task('app', function(){
 	swartz.webServer({
 		port : 9001, // 端口
 		path : 'view', // 前端目录
+		https : { // 是否启用https服务,不启用则不用配置
+			port : 9443, // https端口
+			key : 'path', // 证书key
+			cert : 'path', // 证书cert
+			only : false // http服务重定向至https服务,默认false
+		},
 		history : false // 是否开启前端路由模式 默认false
 	})
 	// 静态资源目录
