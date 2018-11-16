@@ -17,7 +17,7 @@ process.on('message', function(obj){
 function webServer(obj){
 	let webApp = express();
 	const httpServer = http.createServer(webApp);
-	let isHppts = true; // 是否启用https服务
+	let isHttps = true; // 是否启用https服务
 	let httpsServer; // 定义https服务变量
 
 	// 判断配置是否有https字段
@@ -26,14 +26,14 @@ function webServer(obj){
 		let https_key = ['port', 'key', 'cert'];
 		https_key.forEach((item) => {
 			if(!obj.https[item]){
-				isHppts = false;
+				isHttps = false;
 			}
 		})
 	}else{
-		isHppts = false;
+		isHttps = false;
 	}
 
-	if(isHppts){
+	if(isHttps){
 		// 启动https服务并导入证书
 		httpsServer = https.createServer({
 			key : fs.readFileSync(obj.https.key),
@@ -64,8 +64,8 @@ function webServer(obj){
 			webApp.use(history())
 		};
 
-		if(obj.https.only && isHppts){
-			webApp.use('*', goHttps)
+		if(isHttps){
+			obj.https.only && webApp.use('*', goHttps)
 		}
 
 		webApp.use('/', express.static(serverAddr));
@@ -77,7 +77,7 @@ function webServer(obj){
 	        })
 		})
 
-		if(isHppts){
+		if(isHttps){
 			httpsServer.listen(obj.https.port, () => {
 				console.log("https server is open at " + _.getIP() + ':' + obj.https.port)
 				_.sendMsg(process, {
