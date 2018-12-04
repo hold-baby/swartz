@@ -65,7 +65,7 @@ function uploadServer(obj){
 
             // 判断是否有临时目录 如果没有则创建
             if (!fs.existsSync(tmpdir)) {  
-                fs.mkdir(tmpdir);  
+                fs.mkdir(tmpdir, () => {});  
             }
 
             // 把文件上传至临时目录
@@ -95,7 +95,7 @@ function uploadServer(obj){
                 
                 // 判断是否有部署目录 如果没有则创建
                 if (!fs.existsSync(targetDir)) {  
-                    fs.mkdir(targetDir);  
+                    fs.mkdir(targetDir, () => {});  
                 }
 
                 // 获取文件后缀名
