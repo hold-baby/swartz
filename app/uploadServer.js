@@ -134,19 +134,19 @@ function uploadServer(obj){
 
         app.listen(obj.port, () => {
             console.log('upload Server is running on: ', _.getIP() + ':' +obj.port);  
-            _.sendMsg(process, {
+            _this.isCMD ? _.sendMsg(process, {
                 des : '服务启动成功',
                 type : 'start'
-            })
+            }) : false
         }); 
 
         return app
     }catch(e){
         console.log(e)
-        _.sendMsg(process, {
+        _this.isCMD ? _.sendMsg(process, {
             des : e,
             type : 'close'
-        })
+        }) : false
     };
 }
 

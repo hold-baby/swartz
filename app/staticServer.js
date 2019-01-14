@@ -13,6 +13,8 @@ process.on('message', function(obj){
 function staticServer(obj){
 	let static = express();
 
+	let _this = this;
+
 	try{
 
 		static.use('*', _.corsStatic);
@@ -34,17 +36,17 @@ function staticServer(obj){
 
 		static.listen(obj.port, () => {
 			console.log("static server is open at " + _.getIP() + ':' + obj.port)
-			_.sendMsg(process, {
+			_this.isCMD ? _.sendMsg(process, {
                 des : '服务启动成功',
                 type : 'start'
-            })
+            }) : false
 		})
 	}catch(e){
 		console.log(e)
-        _.sendMsg(process, {
+        _this.isCMD ? _.sendMsg(process, {
             des : e,
             type : 'close'
-        })
+        }) : false
 	}
 	
 	return static

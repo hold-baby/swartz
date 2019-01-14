@@ -20,6 +20,8 @@ function webServer(obj){
 	let isHttps = true; // 是否启用https服务
 	let httpsServer; // 定义https服务变量
 
+	let _this = this;
+
 	// 判断配置是否有https字段
 	if(!!obj.https){
 		// https服务必有字段检查
@@ -71,27 +73,27 @@ function webServer(obj){
 		webApp.use('/', express.static(serverAddr));
 		httpServer.listen(obj.port, () => {
 			console.log("web server is open at " + _.getIP() + ':' + obj.port)
-			_.sendMsg(process, {
+			_this.isCMD ? _.sendMsg(process, {
 	            des : '服务启动成功',
 	            type : 'start'
-	        })
+	        }) : false
 		})
 
 		if(isHttps){
 			httpsServer.listen(obj.https.port, () => {
 				console.log("https server is open at " + _.getIP() + ':' + obj.https.port)
-				_.sendMsg(process, {
+				_this.isCMD ? _.sendMsg(process, {
 		            des : '服务启动成功',
 		            type : 'start'
-		        })
+		        }) : false
 			})
 		}
 	}catch(e){
 		console.log(e)
-        _.sendMsg(process, {
+        _this.isCMD ? _.sendMsg(process, {
             des : e,
             type : 'close'
-        })
+        }) : false
 	}
 
 	

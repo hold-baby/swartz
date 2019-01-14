@@ -18,7 +18,7 @@ function swartz(){
 			return
 		}
 		_.probe(obj.port).then(() => {
-			this.createChild('/webServer.js', obj)
+			this.isCMD ? this.createChild('/webServer.js', obj) : webServer.call(this, obj)
 		})
 	};
 	// 静态资源服务
@@ -27,13 +27,13 @@ function swartz(){
 			return
 		}
 		_.probe(obj.port).then(() => {
-			this.createChild('/staticServer.js', obj)
+			this.isCMD ? this.createChild('/staticServer.js', obj) : staticServer.call(this, obj)
 		})
 	};
 	// 接收服务
 	this.uploadServer = (obj) => {
 		_.probe(obj.port).then(() => {
-			this.createChild('/uploadServer.js', obj)
+			this.isCMD ? this.createChild('/uploadServer.js', obj) : uploadServer.call(this, obj)
 		})
 	};
 	// 上传服务

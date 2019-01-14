@@ -26,6 +26,8 @@ cli.launch({
 	let swartz;
 	swartz = require('../app/swartz.js');
 
+	swartz.isCMD = true;
+
 	Object.defineProperty(global, 'swartz', {
 	  enumerable: true,
 	  writable: false,
