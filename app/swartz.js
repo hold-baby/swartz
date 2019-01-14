@@ -33,7 +33,6 @@ function swartz(){
 	// 接收服务
 	this.uploadServer = (obj) => {
 		_.probe(obj.port).then(() => {
-			// uploadServer(obj)
 			this.createChild('/uploadServer.js', obj)
 		})
 	};
@@ -58,6 +57,26 @@ function swartz(){
 			this.serverList[app.getID] = app;
 		}
 	};
+	// 执行任务
+	this.run = function(tasks){
+		if(Array.isArray(tasks)){
+			this.taskList.forEach((task) => {
+				if(tasks.some(function(name){
+					return name === task.taskName
+				})){
+					task.fn()
+				}
+			})
+		}else if(typeof tasks === 'string'){
+			this.taskList.forEach(function(task){
+				if(task.taskName === tasks){
+					task.fn()
+				}
+			})
+		}else{
+			throw new Error('未找到任务或参数错误')
+		}
+	}
 };
 
 // 检查是否有端口参数
