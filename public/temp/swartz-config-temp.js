@@ -48,3 +48,17 @@ swartz.task('push', function(){
 		path : 'view' // 待上传目录
 	})
 })
+
+/**
+ * 启动proxy任务
+ * 任务包含一个服务
+ * 接口代理服务
+ */
+swartz.task('proxy', function(){
+	swartz.proxyServer({
+		port : 5000,
+		optiongs: {
+			target: 'http://127.0.0.1:5000'
+		}
+	})
+})

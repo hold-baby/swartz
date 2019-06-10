@@ -40,6 +40,14 @@ function swartz(){
 	this.pushServer = (obj) => {
 		pushServer(obj)
 	};
+	this.proxyServer = (obj) => {
+		if(!checkObj(obj)){
+			return
+		}
+		_.probe(obj.port).then(() => {
+			this.isCMD ? this.createChild('/proxyServer.js', obj) : proxyServer.call(this, obj)
+		})
+	}
 	// 获取配置任务
 	this.taskList = [];
 	this.task = (task, fn) => {
