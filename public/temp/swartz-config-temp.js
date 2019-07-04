@@ -57,7 +57,7 @@ swartz.task('push', function(){
 swartz.task('proxy', function(){
 	swartz.proxyServer({
 		port : 5000,
-		optiongs: {
+		options: {
 			target: 'http://127.0.0.1:5000'
 		}
 	})
