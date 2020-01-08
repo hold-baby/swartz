@@ -1,6 +1,8 @@
-let path = require('path');
-let express = require('express');
+const path = require('path');
+const express = require('express');
+const colors = require('colors');
 const proxy = require('http-proxy-middleware')
+const ip = require('../lib/ip');
 
 const _ = require('../lib/util.js');
 
@@ -38,7 +40,9 @@ function proxyServer(obj){
 		proxyApp.use('/', proxy(obj.options))
 		
 		proxyApp.listen(obj.port, () => {
-			console.log("proxy server is open at " + _.getIP() + ':' + obj.port)
+			console.log("proxy server is open at ")
+			console.log(`${ip.getIP()}:${obj.port}`.yellow)
+			console.log(`${ip.getIP4()}:${obj.port}`.yellow)
 			_this.isCMD ? _.sendMsg(process, {
                 des : '服务启动成功',
                 type : 'start'

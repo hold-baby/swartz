@@ -2,11 +2,12 @@
 
 let program = require('commander');
 const Liftoff = require('liftoff');
-
-const colors = require('colors');
+const address = require('address');
+const npmYuan = require("npm-yuan")
 const path = require('path');
 const fs = require('fs');
 
+const getInfoFn = require("../lib/getInfoFn")
 const pkg = require('../package.json');
 const cfg = require('../lib/config.js');
 
@@ -40,6 +41,8 @@ cli.launch({
 	program
 	.version(cfg.info, '-v, --version', pkg.version)
 	.option('init', '初始化')
+	.option('to', '设置npm源')
+	.option('get', '获取各种信息')
 	.parse(process.argv);
 
 	// 命令行参数
@@ -47,6 +50,11 @@ cli.launch({
 
 	if(program.init){
 		swartz.swartzInit();
+	}else if(program.to){
+		const target = args[0]
+		npmYuan.yuanSet(target)
+	}else if(program.get){
+		getInfoFn(args)
 	}else{
 		// 配置文件路径
 		if(env.configPath){

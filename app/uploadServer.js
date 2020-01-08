@@ -5,6 +5,8 @@ const formidable = require('formidable');
 const archiver = require('archiver');
 const unzip = require("node-unzip-2");
 const bodyParser = require('body-parser');
+const colors = require('colors');
+const ip = require('../lib/ip');
 
 const _ = require('../lib/util.js');
 
@@ -16,6 +18,8 @@ process.on('message', function(obj){
  * 服务器接收服务
  */
 function uploadServer(obj){
+    let _this = this;
+    
     // 上传服务
     const app = express();
     try{
@@ -133,7 +137,10 @@ function uploadServer(obj){
         })
 
         app.listen(obj.port, () => {
-            console.log('upload Server is running on: ', _.getIP() + ':' +obj.port);  
+            console.log("upload Server is running on: ")
+            console.log(`${ip.getIP()}:${obj.port}`.yellow)
+            console.log(`${ip.getIP4()}:${obj.port}`.yellow)
+
             _this.isCMD ? _.sendMsg(process, {
                 des : '服务启动成功',
                 type : 'start'

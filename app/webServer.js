@@ -1,9 +1,11 @@
-let fs = require('fs');
-let path = require('path');
-let express = require('express');
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
 const http = require('http');
 const https = require('https');
-let history = require('connect-history-api-fallback');
+const ip = require('../lib/ip');
+const colors = require('colors');
+const history = require('connect-history-api-fallback');
 
 const _ = require('../lib/util.js');
 
@@ -72,7 +74,9 @@ function webServer(obj){
 
 		webApp.use('/', express.static(serverAddr));
 		httpServer.listen(obj.port, () => {
-			console.log("web server is open at " + _.getIP() + ':' + obj.port)
+			console.log("web server is open at ")
+			console.log(`${ip.getIP()}:${obj.port}`.yellow)
+			console.log(`${ip.getIP4()}:${obj.port}`.yellow)
 			_this.isCMD ? _.sendMsg(process, {
 	            des : '服务启动成功',
 	            type : 'start'
@@ -81,7 +85,9 @@ function webServer(obj){
 
 		if(isHttps){
 			httpsServer.listen(obj.https.port, () => {
-				console.log("https server is open at " + _.getIP() + ':' + obj.https.port)
+				console.log("https server is open at ")
+				console.log(`${ip.getIP()}:${obj.https.port}`.yellow)
+				console.log(`${ip.getIP4()}:${obj.https.port}`.yellow)
 				_this.isCMD ? _.sendMsg(process, {
 		            des : '服务启动成功',
 		            type : 'start'

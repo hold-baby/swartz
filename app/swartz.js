@@ -1,5 +1,5 @@
 const path = require('path');
-
+const colors = require('colors');
 const _ = require('../lib/util');
 require('../lib/format');
 const webServer = require('../app/webServer');
@@ -8,6 +8,7 @@ const uploadServer = require('../app/uploadServer');
 const pushServer = require('../app/pushServer');
 const swartzInit = require('../app/swartzInit');
 const Listen = require('../app/listen');
+const ip = require('../lib/ip');
 
 // swartz类
 function swartz(){
@@ -96,6 +97,5 @@ function checkObj(obj){
 
 	return true
 };
-
 
 module.exports = new swartz()

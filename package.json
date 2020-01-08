@@ -1,6 +1,6 @@
 {
   "name": "swartz",
-  "version": "0.1.26",
+  "version": "0.1.36",
   "description": "A deployment scheme for Test Server",
   "main": "app/swartz.js",
   "preferGlobal": "true",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/hold-baby/swartz#readme",
   "dependencies": {
+    "address": "^1.1.2",
     "archiver": "^2.1.1",
     "colors": "^1.2.1",
     "commander": "^2.15.1",
@@ -36,6 +37,7 @@
     "http-proxy-middleware": "^0.19.1",
     "liftoff": "^2.5.0",
     "node-unzip-2": "^0.2.7",
+    "npm-yuan": "^0.1.22",
     "progress": "^2.0.0",
     "request": "^2.85.0"
   }

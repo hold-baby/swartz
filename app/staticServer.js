@@ -1,6 +1,7 @@
-let path = require('path');
-let express = require('express');
-
+const path = require('path');
+const express = require('express');
+const ip = require('../lib/ip');
+const colors = require('colors');
 const _ = require('../lib/util.js');
 
 process.on('message', function(obj){
@@ -35,7 +36,9 @@ function staticServer(obj){
 		}
 
 		static.listen(obj.port, () => {
-			console.log("static server is open at " + _.getIP() + ':' + obj.port)
+			console.log("static server is open at ")
+			console.log(`${ip.getIP()}:${obj.port}`.yellow)
+			console.log(`${ip.getIP4()}:${obj.port}`.yellow)
 			_this.isCMD ? _.sendMsg(process, {
                 des : '服务启动成功',
                 type : 'start'
