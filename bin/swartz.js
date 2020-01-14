@@ -52,7 +52,11 @@ cli.launch({
 		swartz.swartzInit();
 	}else if(program.to){
 		const target = args[0]
-		npmYuan.yuanSet(target)
+		if(target === "show"){
+			npmYuan.show()
+		}else{
+			npmYuan.yuanSet(target)
+		}
 	}else if(program.get){
 		getInfoFn(args)
 	}else{
