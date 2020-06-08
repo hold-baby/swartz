@@ -11,6 +11,10 @@ const swartzInit = require('../app/swartzInit');
 const Listen = require('../app/listen');
 const ip = require('../lib/ip');
 
+const excel = require("../lib/excel")
+const fse = require("../utils/fs/fs")
+const beauty = require("../utils/beauty")
+
 // swartz类
 function swartz(){
 	this.serverList = {};
@@ -93,6 +97,11 @@ function swartz(){
 			throw new Error('未找到任务或参数错误')
 		}
 	}
+
+
+	this.excel = excel
+	this.fse = fse
+	this.beauty = beauty
 };
 
 // 检查是否有端口参数
