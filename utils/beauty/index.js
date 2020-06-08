@@ -1,0 +1,22 @@
+const beauty = require("js-beautify")
+
+// {
+//     "indent_size": 4,
+//     "html": {
+//         "end_with_newline": true,
+//         "js": {
+//             "indent_size": 2
+//         },
+//         "css": {
+//             "indent_size": 2
+//         }
+//     },
+//     "css": {
+//         "indent_size": 1
+//     },
+//     "js": {
+//        "preserve-newlines": true
+//     }
+// }
+
+module.exports = beauty

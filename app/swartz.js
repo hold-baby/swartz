@@ -5,6 +5,7 @@ require('../lib/format');
 const webServer = require('../app/webServer');
 const staticServer = require('../app/staticServer');
 const uploadServer = require('../app/uploadServer');
+const uploadServer2 = require('../app/uploadServer2');
 const pushServer = require('../app/pushServer');
 const swartzInit = require('../app/swartzInit');
 const Listen = require('../app/listen');
@@ -36,7 +37,13 @@ function swartz(){
 		_.probe(obj.port).then(() => {
 			this.isCMD ? this.createChild('/uploadServer.js', obj) : uploadServer.call(this, obj)
 		})
+	};// 接收服务
+	this.uploadServer2 = (obj) => {
+		_.probe(obj.port).then(() => {
+			uploadServer2.call(this, obj)
+		})
 	};
+
 	// 上传服务
 	this.pushServer = (obj) => {
 		pushServer(obj)

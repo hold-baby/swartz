@@ -51,7 +51,10 @@ function pushServer(obj){
 				return
 			}
 			if(res.statusCode === 200){
+				console.log("发布成功")
+				console.log(body)
 			}else{
+				console.log("发布失败")
 				console.log(res.statusCode, res.body)
 			}
 		});
@@ -77,7 +80,7 @@ function pushServer(obj){
 					if(!bar.complete){
 						interval()
 					}else{
-						console.log('发布成功:', new Date().format('yyyy-MM-dd hh:mm:ss'))
+						console.log('上传成功:', new Date().format('yyyy-MM-dd hh:mm:ss'))
 					};
 				})
 			}, 100)

@@ -10,14 +10,10 @@ const ip = require('../lib/ip');
 
 const _ = require('../lib/util.js');
 
-process.on('message', function(obj){
-    uploadServer(obj)
-});
-
 /**
  * 服务器接收服务
  */
-function uploadServer(obj){
+function uploadServer2(obj){
     let _this = this;
     
     // 上传服务
@@ -119,7 +115,7 @@ function uploadServer(obj){
                             if(obj.success){
                                 obj.success(res)
                             }else{
-                                res.status(202).end()
+                                res.status(200).end()
                             }
                         })
                     } 
@@ -145,48 +141,26 @@ function uploadServer(obj){
             console.log(`${ip.getIP()}:${obj.port}`.yellow)
             console.log(`${ip.getIP4()}:${obj.port}`.yellow)
 
-            _this.isCMD ? _.sendMsg(process, {
-                des : '服务启动成功',
-                type : 'start'
-            }) : false
         }); 
 
         return app
     }catch(e){
         console.log(e)
-        _this.isCMD ? _.sendMsg(process, {
-            des : e,
-            type : 'close'
-        }) : false
     };
 }
 
-module.exports = uploadServer;
+module.exports = uploadServer2;
 
 /**
  * 解压缩
  */
 function exto(targetFile, targetPath){
     return new Promise((resolve, reject) => {
-    deleteall(targetPath)
-    fs.createReadStream(targetFile).pipe(unzip.Extract({ 
-        path: targetPath
-    }));
-    resolve()
-
-
-    // fs.createReadStream(targetFile)
-    //   .pipe(unzip.Parse())
-    //   .on('entry', function (entry) {
-    //     var fileName = entry.path;
-    //     var type = entry.type; // 'Directory' or 'File'
-    //     var size = entry.size;
-
-    //     console.log(fileName)
-    //     entry.pipe(fs.createWriteStream(targetPath));
-        // resolve()
-    //   });
-
+        deleteall(targetPath)
+        fs.createReadStream(targetFile).pipe(unzip.Extract({ 
+            path: targetPath
+        }));
+        resolve()
     })
 }
 
