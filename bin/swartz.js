@@ -10,6 +10,7 @@ const fs = require('fs');
 const getInfoFn = require("../lib/getInfoFn")
 const pkg = require('../package.json');
 const cfg = require('../lib/config.js');
+const hosts = require("../lib/hosts")
 
 const cli = new Liftoff({
 	name : 'swartz',
@@ -43,6 +44,7 @@ cli.launch({
 	.option('init', '初始化')
 	.option('to', '设置npm源')
 	.option('get', '获取各种信息')
+	.option('hosts', 'hosts')
 	.parse(process.argv);
 
 	// 命令行参数
@@ -59,6 +61,8 @@ cli.launch({
 		}
 	}else if(program.get){
 		getInfoFn(args)
+	}else if(program.hosts){
+		hosts()
 	}else{
 		// 配置文件路径
 		if(env.configPath){
